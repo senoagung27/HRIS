@@ -1,49 +1,33 @@
 require('./bootstrap');
 
-function dataTableController (id) {
-    return {
-        id,
-        deleteItem() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emit('deleteItem', this.id);
-                }
-            })
+window.Vue = require('vue');
+
+import iosAlertView from 'vue-ios-alertview';
+Vue.use(iosAlertView);
+
+import UsersComponent from './components/UsersComponent';
+import ProfileComponent from './components/ProfileComponent';
+import AdduserComponent from './components/AdduserComponent';
+Vue.component('users-component', UsersComponent);
+Vue.component('profile-component', ProfileComponent);
+Vue.component('adduser-component', AdduserComponent);
+
+const app = new Vue({
+    el: '#app',
+    data() {
+        return {
+            user: AuthUser
+        }
+    },
+    methods: {
+        userCan(permission) {
+            if(this.user && this.user.allPermissions.includes(permission)) {
+                return true;
+            }
+            return false;
+        },
+        MakeUrl(path) {
+            return BaseUrl(path);
         }
     }
-}
-
-function dataTableMainController () {
-    return {
-        setCallback() {
-            Livewire.on('deleteResult', (result) => {
-                if (result.status) {
-                    Swal.fire(
-                        'Deleted!',
-                        result.message,
-                        'success'
-                    );
-                } else {
-                    Swal.fire(
-                        'Error!',
-                        result.message,
-                        'error'
-                    );
-                }
-            });
-        }
-    }
-}
-
-window.__controller = {
-    dataTableController,
-    dataTableMainController
-}
+});

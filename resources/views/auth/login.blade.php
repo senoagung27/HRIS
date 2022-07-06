@@ -1,48 +1,61 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+@extends('layouts.auth-master')
 
-        <x-jet-validation-errors class="mb-4" />
+@section('content')
+<div class="card card-primary">
+  <div class="card-header"><h4>Login</h4></div>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
+  <div class="card-body">
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input aria-describedby="emailHelpBlock" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Registered email address" tabindex="1" value="{{ old('email') }}" autofocus>
+        <div class="invalid-feedback">
+          {{ $errors->first('email') }}
+        </div>
+        @if(App::environment('demo'))
+        <small id="emailHelpBlock" class="form-text text-muted">
+            Demo Email: admin@example.com
+        </small>
         @endif
+      </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+      <div class="form-group">
+        <div class="d-block">
+            <label for="password" class="control-label">Password</label>
+          <div class="float-right">
+            <a href="{{ route('password.request') }}" class="text-small">
+              Forgot Password?
+            </a>
+          </div>
+        </div>
+        <input aria-describedby="passwordHelpBlock" id="password" type="password" placeholder="Your account password" class="form-control{{ $errors->has('password') ? ' is-invalid': '' }}" name="password" tabindex="2">
+        <div class="invalid-feedback">
+          {{ $errors->first('password') }}
+        </div>
+        @if(App::environment('demo'))
+        <small id="passwordHelpBlock" class="form-text text-muted">
+            Demo Password: 1234
+        </small>
+        @endif
+      </div>
 
-            <div>
-                <x-jet-label value="{{ __('Email') }}" />
-                <x-jet-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember"{{ old('remember') ? ' checked': '' }}>
+          <label class="custom-control-label" for="remember">Remember Me</label>
+        </div>
+      </div>
 
-            <div class="mt-4">
-                <x-jet-label value="{{ __('Password') }}" />
-                <x-jet-input class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <input type="checkbox" class="form-checkbox" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Login') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="mt-5 text-muted text-center">
+  Don't have an account? <a href="{{ route('register') }}">Create One</a>
+</div>
+@endsection

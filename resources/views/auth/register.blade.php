@@ -1,43 +1,53 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+@extends('layouts.auth-master')
 
-        <x-jet-validation-errors class="mb-4" />
+@section('content')
+<div class="card card-primary">
+  <div class="card-header"><h4>Register</h4></div>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+  <div class="card-body">
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" tabindex="1" placeholder="Full name" value="{{ old('name') }}" autofocus>
+          <div class="invalid-feedback">
+            {{ $errors->first('name') }}
+          </div>
+        </div>
 
-            <div>
-                <x-jet-label value="{{ __('Name') }}" />
-                <x-jet-input class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email address" name="email" tabindex="1" value="{{ old('email') }}" autofocus>
+        <div class="invalid-feedback">
+          {{ $errors->first('email') }}
+        </div>
+      </div>
 
-            <div class="mt-4">
-                <x-jet-label value="{{ __('Email') }}" />
-                <x-jet-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+      <div class="form-group">
+        <label for="password" class="control-label">Password</label>
+        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid': '' }}" placeholder="Set account password" name="password" tabindex="2">
+        <div class="invalid-feedback">
+          {{ $errors->first('password') }}
+        </div>
+      </div>
 
-            <div class="mt-4">
-                <x-jet-label value="{{ __('Password') }}" />
-                <x-jet-input class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
+      <div class="form-group">
+        <label for="password_confirmation" class="control-label">Confirm Password</label>
+        <input id="password_confirmation" type="password" placeholder="Confirm account password" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid': '' }}" name="password_confirmation" tabindex="2">
+        <div class="invalid-feedback">
+          {{ $errors->first('password_confirmation') }}
+        </div>
+      </div>
 
-            <div class="mt-4">
-                <x-jet-label value="{{ __('Confirm Password') }}" />
-                <x-jet-input class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="mt-5 text-muted text-center">
+ Already have an account? <a href="{{ route('login') }}">Sign In</a>
+</div>
+@endsection
