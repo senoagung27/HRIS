@@ -6,10 +6,16 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index_view ()
+    // public function index_view ()
+    // {
+    //     return view('pages.user.user-data', [
+    //         'user' => User::class
+    //     ]);
+    // }
+    public function index()
     {
-        return view('pages.user.user-data', [
-            'user' => User::class
-        ]);
+        $data = User::latest()->paginate(10);
+
+        return view('pages.user.user-data', compact('data'));
     }
 }

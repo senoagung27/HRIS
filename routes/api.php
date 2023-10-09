@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\StokController;
+use App\Http\Controllers\api\LoginFFController;
+use App\Http\Controllers\api\LoginJubelioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     Route::post('loginjubelio', 'LoginController@login');
+//     return $request->user();
+// });
+Route::post('/loginjubelio', [LoginJubelioController::class, 'login']);
+Route::post('/loginff', [LoginFFController::class, 'login']);
+Route::get('/getdata',[StokController::class, 'getData']);
+Route::get('/getstok',[StokController::class, 'getStok']);
+// Route::get('/getstok',[StokController::class, 'getstokff']);
+// Route::middleware('auth:api')->group(function () {
+//     Route::get('getstok',[StokController::class, 'getStock']);
+// });

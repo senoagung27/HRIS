@@ -1,5 +1,6 @@
-require('./bootstrap');
-
+import './bootstrap';
+import '../css/app.css';
+import '../css/tailwind.css';
 function dataTableController (id) {
     return {
         id,
