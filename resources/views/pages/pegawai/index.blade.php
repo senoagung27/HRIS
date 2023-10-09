@@ -56,7 +56,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->nama }}</td>
                                                     <td>{{ $item->jabatan }}</td>
-                                                    <td>{{ $item->tanggal_join }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($item->tanggal_join)) }}</td>
                                                       <th>
                                                         <a href="#"
                                                             class="edit btn btn-info btn-sm">
