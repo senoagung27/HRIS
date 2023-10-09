@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\StokFFController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\StokJubelioController;
@@ -104,14 +105,14 @@ Route::group([ "middleware" => ['auth:sanctum', config('jetstream.auth_session')
     /**
      * User Routes
      */
-    Route::group(['prefix' => 'posts'], function() {
-        Route::get('/', [ PostsController::class, 'index'])->name('posts.index');
-        Route::get('/create', 'PostsController@create')->name('posts.create');
-        Route::post('/create', 'PostsController@store')->name('posts.store');
-        Route::get('/{post}/show', 'PostsController@show')->name('posts.show');
-        Route::get('/{post}/edit', 'PostsController@edit')->name('posts.edit');
-        Route::patch('/{post}/update', 'PostsController@update')->name('posts.update');
-        Route::delete('/{post}/delete', 'PostsController@destroy')->name('posts.destroy');
+    Route::group(['prefix' => 'pegawai'], function() {
+        Route::get('/', [ PegawaiController::class, 'index'])->name('pegawai.index');
+        Route::get('/create', [ PegawaiController::class, 'create'])->name('pegawai.create');
+        Route::post('/store', [ PegawaiController::class, 'store'])->name('pegawai.store');
+        Route::get('/{id}/show', [ PegawaiController::class, 'show'])->name('pegawai.show');
+        Route::get('/{id}/edit', [ PegawaiController::class, 'edit'])->name('pegawai.edit');
+        Route::patch('/{id}/update',[ PegawaiController::class, 'update'])->name('pegawai.update');
+        Route::delete('/{id}/delete', [ PegawaiController::class, 'destroy'])->name('pegawai.destroy');
     });
 
     Route::resource('roles', RolesController::class);

@@ -21,6 +21,10 @@
                 <a href="{{ route('users.index') }}" class="nav-link"><i
                         class="fas fa-database"></i><span>User</span></a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('pegawai.index') }}" class="nav-link"><i
+                        class="fas fa-user"></i><span>Pegawai</span></a>
+            </li>
             {{-- @endrole
             @endauth --}}
 
