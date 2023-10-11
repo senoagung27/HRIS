@@ -39,7 +39,17 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cuti::create([
+            'id_pegawai' => $request->input('id_pegawai'),
+            'nama' => $request->input('nama'),
+            'status' => $request->input('status'),
+            'lama' => $request->input('lama'),
+            'pengajuan_cuti' => $request->input('pengajuan_cuti')
+
+        ]);
+
+        return redirect()->route('pegawai.index')
+                        ->with('success','Berhasil Dibuat Data Pegawai Baru');
     }
 
     /**

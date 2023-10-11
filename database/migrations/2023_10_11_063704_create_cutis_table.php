@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('cutis', function (Blueprint $table) {
             $table->id();
             $table->integer('id_pegawai');
-            $table->string('nama');
+            $table->string('jenis_cuti');
             $table->string('status');
-            $table->integer('lama');
-            $table->date('pengajuan_cuti');
+            $table->integer('jangka_waktu');
+            $table->date('tanggal_pengajuan');
             $table->timestamps();
         });
     }
