@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CutiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\StokFFController;
@@ -113,6 +114,15 @@ Route::group([ "middleware" => ['auth:sanctum', config('jetstream.auth_session')
         Route::get('/{id}/edit', [ PegawaiController::class, 'edit'])->name('pegawai.edit');
         Route::patch('/{id}/update',[ PegawaiController::class, 'update'])->name('pegawai.update');
         Route::delete('/{id}/delete', [ PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+    });
+    Route::group(['prefix' => 'cuti'], function() {
+        Route::get('/', [ CutiController::class, 'index'])->name('cuti.index');
+        Route::get('/create', [ CutiController::class, 'create'])->name('cuti.create');
+        Route::post('/store', [ CutiController::class, 'store'])->name('cuti.store');
+        Route::get('/{id}/show', [ CutiController::class, 'show'])->name('cuti.show');
+        Route::get('/{id}/edit', [ CutiController::class, 'edit'])->name('cuti.edit');
+        Route::patch('/{id}/update',[ CutiController::class, 'update'])->name('cuti.update');
+        Route::delete('/{id}/delete', [ CutiController::class, 'destroy'])->name('cuti.destroy');
     });
 
     Route::resource('roles', RolesController::class);

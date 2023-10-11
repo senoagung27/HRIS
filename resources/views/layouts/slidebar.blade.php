@@ -25,6 +25,10 @@
                 <a href="{{ route('pegawai.index') }}" class="nav-link"><i
                         class="fas fa-user"></i><span>Pegawai</span></a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('cuti.index') }}" class="nav-link"><i
+                        class="fas fa-user"></i><span>Cuti</span></a>
+            </li>
             {{-- @endrole
             @endauth --}}
 
