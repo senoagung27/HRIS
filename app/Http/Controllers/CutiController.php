@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuti;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
@@ -26,7 +27,8 @@ class CutiController extends Controller
      */
     public function create()
     {
-        //
+        $data = Pegawai::get();
+        return view('pages.pegawai.create', compact('data'));
     }
 
     /**

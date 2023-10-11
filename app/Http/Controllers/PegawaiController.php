@@ -26,7 +26,9 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        //
+        $data = Pegawai::get();
+
+        return view('pages.pegawai.create', compact('data'));
     }
 
     /**
@@ -37,7 +39,15 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Pegawai::create([
+            'nama' => $request->input('nama'),
+            'jabatan' => $request->input('jabatan'),
+            'tanggal_join' => $request->input('tanggal_join')
+
+        ]);
+
+        return redirect()->route('pegawai.index')
+                        ->with('success','Berhasil Dibuat Data Pegawai Baru');
     }
 
     /**

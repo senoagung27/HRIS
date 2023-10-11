@@ -25,8 +25,7 @@
             </div>
             <div class="lead">
                 <a href="{{ route('pegawai.create') }}" class="btn btn-primary btn-sm mb-3 rounded shadow">
-                    <i
-                        class="fas fa-plus"></i><span> Tambah Data</span></a>
+                    <i class="fas fa-plus"></i><span> Tambah Data</span></a>
             </div>
 
             <div class="section-body">
@@ -37,7 +36,7 @@
                             <div class="card-body p-4">
                                 <div class="table-responsive">
                                     {{-- <table class="table table-bordered table-striped mb-0"> --}}
-                                    <table  id="example2" class="table table-bordered table-striped">
+                                    <table id="example2" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -57,13 +56,11 @@
                                                     <td>{{ $item->nama }}</td>
                                                     <td>{{ $item->jabatan }}</td>
                                                     <td>{{ date('j F Y', strtotime($item->tanggal_join)) }}</td>
-                                                      <th>
-                                                        <a href="#"
-                                                            class="edit btn btn-info btn-sm">
+                                                    <th>
+                                                        <a href="#" class="edit btn btn-info btn-sm">
                                                             <i class="ri-eye-2-fill"></i> Edit
                                                         </a>
-                                                        <a href="#"
-                                                            class="edit btn btn-danger btn-sm">
+                                                        <a href="#" class="edit btn btn-danger btn-sm">
                                                             <i class="ri-eye-2-fill"></i> Delete
                                                         </a>
                                                     </th>
@@ -77,8 +74,7 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </section>
+        </section>
     </div>
 @endsection
 @section('ff')
